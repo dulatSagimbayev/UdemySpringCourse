@@ -15,11 +15,15 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String isbn;
+
     @ManyToMany
     @JoinTable(name = "author_book",joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
     private String title;
+
+    @ManyToOne
+    private Publisher publisher;
 
     public Book(){
 
@@ -27,6 +31,14 @@ public class Book {
     public Book(String  isbn, String title){
         this.isbn=isbn;
         this.title=title;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     public String getTitle() {

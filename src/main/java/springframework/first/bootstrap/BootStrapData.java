@@ -35,20 +35,31 @@ public class BootStrapData implements CommandLineRunner {
         dulat.getBooks().add(someBook);
         someBook.getAuthors().add(dulat);
 
+        someBook.setPublisher(publisher);
+        publisher.getBooks().add(someBook);
+
+
         authorRepository.save(dulat);
         bookRepository.save(someBook);
+        publisherRepository.save(publisher);
 
         Author eric = new Author("Eric","Johnson");
         Book lord  = new Book("Lord of the rings","12333334444");
         eric.getBooks().add(lord);
         lord.getAuthors().add(eric);
 
+        lord.setPublisher(publisher);
+        publisher.getBooks().add(lord);
+
+
         authorRepository.save(eric);
         bookRepository.save(lord);
+        publisherRepository.save(publisher);
 
         System.out.println("Starting with BootStrap...");
         System.out.println("Number of books: "+bookRepository.count());
         System.out.println("Number of publisher: "+publisherRepository.count());
+        System.out.println("Publisher number of books: "+publisher.getBooks().size());
 
     }
 }
