@@ -4,6 +4,7 @@ import org.springframework.context.annotation.EnableMBeanExport;
 
 import javax.persistence.*;
 import javax.xml.namespace.QName;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,14 +18,13 @@ public class Book {
     @ManyToMany
     @JoinTable(name = "author_book",joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authors;
+    private Set<Author> authors = new HashSet<>();
     private String title;
 
     public Book(){
 
     }
-    public Book(String  isbn, String title, Set<Author> authors){
-        this.authors=authors;
+    public Book(String  isbn, String title){
         this.isbn=isbn;
         this.title=title;
     }
